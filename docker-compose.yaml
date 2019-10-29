@@ -12,7 +12,7 @@ services:
       - .:/var/app
       - ~/.composer/cache:/root/cache
 
-  testphp73:
+  test:
     image: php:7.3-cli
     working_dir: /var/app
     command: sh -c "php vendor/bin/phpunit -c phpunit.xml"
