@@ -1,0 +1,27 @@
+version: "2.1"
+
+services:
+
+  phpinstall:
+    image: composer
+    working_dir: /var/app
+    command: composer install
+    environment:
+      - COMPOSER_CACHE_DIR=/root/cache
+    volumes:
+      - .:/var/app
+      - ~/.composer/cache:/root/cache
+
+  testphp73:
+    image: php:7.3-cli
+    working_dir: /var/app
+    command: sh -c "php vendor/bin/phpunit -c phpunit.xml"
+    volumes:
+      - .:/var/app
+
+  ci:
+    image: php:7.3-cli
+    working_dir: /var/app
+    command: sh -c "php vendor/bin/phpunit -c phpunit.xml"
+    volumes:
+      - .:/var/app
