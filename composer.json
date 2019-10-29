@@ -1,5 +1,11 @@
 {
     "name": "resgen/lumen-proc",
+    "type": "library",
+    "license": "GPL-3.0+",
+    "authors": [{
+        "name": "Philip Whitt",
+        "email": "philipwhitt88@gmail.com"
+    }],
     "require": {
         "php" : ">=7.3",
         "laravel/lumen-framework" : ">=5.8"
