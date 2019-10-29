@@ -16,6 +16,12 @@ With composer:
 composer require resgen/lumen-proc:1.0.*
 ```
 
+Ensure pcntl_async_signals is enabled for your php install. Example docker alpine RUN:
+
+```bash
+RUN docker-php-ext-install pcntl 
+```
+
 
 ## Configuration
 
