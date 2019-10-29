@@ -56,23 +56,17 @@ Will escape immediately when `check()` is called.
 
 ```php
 
+use Illuminate\Console\Command;
 use Resgen\Common\Proc\ProcessControl;
 use Resgen\Common\Proc\EscapeProcessException;
 
-class ExampleCommand extends Illuminate\Console\Command
+class ExampleCommand extends Command
 {
     protected $name = 'example';
     protected $signature = 'example:run';
 
-    private $proc;
-
-    public function __construct(ProcessControl $proc)
-    {
-        $this->proc = $proc;
-    }
-
     // will run until ProcessControl escapes
-    public function handle()
+    public function handle(ProcessControl $proc)
     {
         try {
             do {
@@ -80,7 +74,7 @@ class ExampleCommand extends Illuminate\Console\Command
 
                 sleep(1);
 
-                $this->proc->check();
+                $proc->check();
 
             } while(true);
 
