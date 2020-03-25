@@ -9,32 +9,37 @@ use Resgen\Common\Proc\Driver as Driver;
 class ProcessControlProvider extends ServiceProvider
 {
 
-    private static $drivers = [
-        'ttl'       => Driver\TtlProcessDriver::class,
-        'runonce'   => Driver\RunOnceProcessDriver::class,
-        'keepalive' => Driver\KeepAliveProcessDriver::class,
+    private $defaultDrivers = [
+        'ttl'          => Driver\TtlProcessDriver::class,
+        'ttl_hardexit' => Driver\TtlInstantKillProcessDriver::class,
+        'runonce'      => Driver\RunOnceProcessDriver::class,
+        'keepalive'    => Driver\KeepAliveProcessDriver::class,
     ];
+
+    protected $customDrivers = [];
 
     public function register()
     {
-        $selectedDriver   = env('LUMEN_PROC_DRIVER', false);
-        $availableDrivers = self::$drivers;
+        $drivers = array_merge($this->customDrivers, $this->defaultDrivers);
 
-        $this->app->singleton(ProcessControl::class, function () use ($selectedDriver, $availableDrivers) {
+        $this->app->singleton(ProcessControl::class, function() use ($drivers) {
+            $selectedDriver = env('LUMEN_PROC_DRIVER', false);
+            $availableDriverKeys = implode(',', array_keys($drivers));
+
             if (!$selectedDriver) {
                 throw new Exception(sprintf(
                     'env.LUMEN_PROC_DRIVER must be set to use proc control. Available drivers: %s',
-                    implode(',', $availableDrivers)
+                    $availableDriverKeys
                 ));
             }
 
-            $driver = $availableDrivers[$selectedDriver] ?? false;
+            $driver = $drivers[$selectedDriver] ?? false;
 
             if (!$driver) {
                 throw new Exception(sprintf(
                     'Invalid proc ctrl driver: %s. Available drivers: %s',
                     $selectedDriver,
-                    implode(',', $availableDrivers),
+                    $availableDriverKeys
                 ));
             }
 
