@@ -35,6 +35,22 @@ class ProcessControlUnitTest extends \Resgen\TestCase
     /**
      * @expectedException \Resgen\Common\Proc\EscapeProcessException
      */
+    public function test_Ttl_HardExitDriver_Should_Exit_Immediately_OnInturuptSignals()
+    {
+        // given
+        putenv('LUMEN_PROC_DRIVER=ttl_hardexit');
+        putenv('LUMEN_PROC_TTL=1000');
+
+        app()->register(ProcessControlProvider::class);
+        $sut = app(ProcessControl::class);
+
+        // when
+        $sut->sigHandle();
+    }
+
+    /**
+     * @expectedException \Resgen\Common\Proc\EscapeProcessException
+     */
     public function test_RunOnceDriver_Should_Exit_Immediately()
     {
         // given
