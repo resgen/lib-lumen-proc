@@ -41,6 +41,11 @@ ENV name: `ttl`.
 
 Runs for N number of seconds. Defaults to 300s runtime. Logs a heart beat message every ~6 seconds. You can adjust the runtime by setting the `LUMEN_PROC_TTL=1000s`. Will exit if a SIGTERM is sent. Intended to be used with a process supervisor like runit, supervisord or inside a docker orchestration env like kubernetes.
 
+#### TtlInstantKillProcessDriver
+ENV name: `ttl_hardexit`. 
+
+Same as TtlProcessDriver, but throws exception as soon as signal is recieved.
+
 #### KeepAliveProcessDriver
 ENV name: `keepalive`. 
 
