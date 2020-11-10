@@ -3,7 +3,7 @@ version: "2.1"
 services:
 
   phpinstall:
-    image: composer
+    image: composer:2.0
     working_dir: /var/app
     command: composer install
     environment:
@@ -13,14 +13,14 @@ services:
       - ~/.composer/cache:/root/cache
 
   test:
-    image: php:7.3-cli
+    image: php:7.4-cli
     working_dir: /var/app
     command: sh -c "php vendor/bin/phpunit -c phpunit.xml"
     volumes:
       - .:/var/app
 
   ci:
-    image: php:7.3-cli
+    image: php:7.4-cli
     working_dir: /var/app
     command: sh -c "php vendor/bin/phpunit -c phpunit.xml"
     volumes:
