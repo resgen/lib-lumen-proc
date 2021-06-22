@@ -2,7 +2,6 @@
 
 namespace Resgen\Common\Proc\Driver;
 
-use Log;
 use Resgen\Common\Proc\ProcessControl;
 use Resgen\Common\Proc\EscapeProcessException;
 
@@ -15,8 +14,6 @@ class TtlProcessDriver extends KeepAliveProcessDriver implements ProcessControl
     public function __construct(SignalHandler $signalHandler)
     {
         parent::__construct($signalHandler);
-
-        $this->log = Log::withName('TtlProcessDriver');
 
         $this->ttlSeconds = env('LUMEN_PROC_TTL', 300);
     }

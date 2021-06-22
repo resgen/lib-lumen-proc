@@ -2,16 +2,16 @@
 
 namespace Resgen\Common\Proc\Driver;
 
-use Log;
 use Resgen\Common\Proc\ProcessControl;
 use Resgen\Common\Proc\EscapeProcessException;
 
 class TtlInstantKillProcessDriver extends TtlProcessDriver implements ProcessControl
 {
+    use Logs;
 
     public function sigHandle()
     {
-        $this->log->info('Interrupt signal recieved. Hard exiting.');
+        $this->log()->info('Interrupt signal recieved. Hard exiting.');
 
         $this->interrupt = true;
 

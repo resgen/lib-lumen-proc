@@ -2,10 +2,9 @@
 
 namespace Resgen\Common\Proc\Driver;
 
-use Log;
-
 class SignalHandler
 {
+    use Logs;
 
     public function bind($scope, $callback)
     {
@@ -32,8 +31,7 @@ class SignalHandler
             pcntl_signal(SIGWINCH, [$scope, $callback]);
 
         } else {
-            Log::withName('SignalHandler')
-                ->warning('pcntl methods not found. sig handler will not work.');
+            $this->log()->warning('pcntl methods not found. sig handler will not work.');
         }
     }
 

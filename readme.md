@@ -33,6 +33,12 @@ Then add the following ENV var with the selected driver:
 LUMEN_PROC_DRIVER=runonce
 ```
 
+By default, the TTL drivers will log an INFO heart beat every ~5 seconds. You can also disable the heart beat log by doing:
+
+```bash
+LUMEN_PROC_HEARTBEAT=disabled
+```
+
 
 ## Available Drivers
 

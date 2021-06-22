@@ -2,15 +2,12 @@
 
 namespace Resgen\Common\Proc\Driver;
 
-use Log;
 use Resgen\Common\Proc\ProcessControl;
 use Resgen\Common\Proc\EscapeProcessException;
 
 class KeepAliveProcessDriver implements ProcessControl
 {
-
-    /** @var Log */
-    protected $log;
+    use Logs;
 
     /** @var int */
     protected $lastMsgTime;
@@ -26,9 +23,7 @@ class KeepAliveProcessDriver implements ProcessControl
 
     public function __construct(SignalHandler $signalHandler)
     {
-        $this->log = Log::withName('KeepAliveProcessDriver');
         $this->startTime  = microtime(true);
-
         $signalHandler->bind($this, 'sigHandle');
     }
 
@@ -43,14 +38,14 @@ class KeepAliveProcessDriver implements ProcessControl
 
         // Heart beat log every ~5secs
         if (microtime(true) - $this->lastMsgTime > 5) {
-            $this->log->info(round($this->timeSpentProcessing).' seconds spent processing');
+            $this->heartBeat()->info(round($this->timeSpentProcessing).' seconds spent processing');
             $this->lastMsgTime = microtime(true);
         }
     }
 
     public function sigHandle()
     {
-        $this->log->info('Interrupt signal recieved. Starting graceful shutdown.');
+        $this->log()->info('Interrupt signal recieved. Starting graceful shutdown.');
         $this->interrupt = true;
     }
 
