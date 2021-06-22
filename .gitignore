@@ -5,3 +5,4 @@
 /.vscode
 .phpintel
 /storage
+composer.lock
