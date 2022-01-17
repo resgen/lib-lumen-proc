@@ -10,10 +10,11 @@ abstract class TestCase extends LumenTestCase
 {
     use MockeryPHPUnitIntegration;
 
-    public function createApplication(): Application
+    public function createApplication() : Application
     {
         $app = new Application();
         $app->withFacades();
+
         return $app;
     }
 

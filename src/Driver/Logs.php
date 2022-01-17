@@ -8,14 +8,14 @@ use Psr\Log\LoggerInterface;
 trait Logs
 {
 
-    private function heartBeat(): HeartBeatAdapter
+    private function heartBeat() : HeartBeatAdapter
     {
         return new HeartBeatAdapter(
             $this->log()
         );
     }
 
-    private function log(): LoggerInterface
+    private function log() : LoggerInterface
     {
         $name = collect(explode("\\", static::class))
             ->last();

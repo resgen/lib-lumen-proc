@@ -2,8 +2,8 @@
 
 namespace Resgen\Common\Proc\Driver;
 
-use Resgen\Common\Proc\ProcessControl;
 use Resgen\Common\Proc\EscapeProcessException;
+use Resgen\Common\Proc\ProcessControl;
 
 class TtlProcessDriver extends KeepAliveProcessDriver implements ProcessControl
 {
@@ -18,7 +18,7 @@ class TtlProcessDriver extends KeepAliveProcessDriver implements ProcessControl
         $this->ttlSeconds = env('LUMEN_PROC_TTL', 300);
     }
 
-    public function check(): void
+    public function check() : void
     {
         parent::check();
 

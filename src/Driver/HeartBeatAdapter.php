@@ -15,7 +15,7 @@ class HeartBeatAdapter
         $this->log = $log;
     }
 
-    public function info($msg): void
+    public function info($msg) : void
     {
         if (env('LUMEN_PROC_HEARTBEAT', 'enabled') == 'disabled') {
             return;

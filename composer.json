@@ -1,31 +1,33 @@
 {
-    "name": "resgen/lumen-proc",
-    "type": "library",
-    "license": "GPL-3.0+",
-    "authors": [{
-        "name": "Philip Whitt",
-        "email": "philipwhitt88@gmail.com"
-    }],
-    "require": {
-        "laravel/lumen-framework" : ">=5.8"
-    },
-    "require-dev": {
-        "phpunit/phpunit" : "^7.0",
-        "mockery/mockery" : "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Resgen\\Common\\Proc\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "classmap": [
-            "tests/"
-        ]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
-    }
+	"name":         "resgen/lumen-proc",
+	"type":         "library",
+	"license":      "GPL-3.0+",
+	"authors":      [
+		{
+			"name":  "Philip Whitt",
+			"email": "philipwhitt88@gmail.com"
+		}
+	],
+	"require":      {
+		"laravel/lumen-framework": ">=5.8"
+	},
+	"require-dev":  {
+		"phpunit/phpunit": "^7.0",
+		"mockery/mockery": "^1.0"
+	},
+	"autoload":     {
+		"psr-4": {
+			"Resgen\\Common\\Proc\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"classmap": [
+			"tests/"
+		]
+	},
+	"config":       {
+		"preferred-install":   "dist",
+		"sort-packages":       true,
+		"optimize-autoloader": true
+	}
 }
