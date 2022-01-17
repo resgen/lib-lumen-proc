@@ -4,6 +4,6 @@ namespace Resgen\Common\Proc;
 
 interface ProcessControl {
 
-    public function check(): void;
-
+	/** Call to check for signal being caught */
+	public function check() : void;
 }

@@ -39,6 +39,12 @@ By default, the TTL drivers will log an INFO heart beat every ~5 seconds. You ca
 LUMEN_PROC_HEARTBEAT=disabled
 ```
 
+You may enable `SignalException` to be thrown asynchronously when a signal is processed, this will happen from wherever your normal code is being executed and gives you a chance to clean things up gracefully while still responding immediately to signals (or ignore them if appropriate.)
+
+```bash
+LUMEN_PROC_THROW_SIGNAL_EXCEPTION=enabled
+```
+
 
 ## Available Drivers
 
