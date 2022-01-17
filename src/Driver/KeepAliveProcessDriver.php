@@ -46,7 +46,7 @@ class KeepAliveProcessDriver implements ProcessControl {
 		}
 	}
 
-	public function sigHandle(int $signo, mixed $info) {
+	public function sigHandle(int $signo, $info) {
 		$this->log()->info('Interrupt signal recieved. Starting graceful shutdown.');
 		$this->interrupt = true;
 

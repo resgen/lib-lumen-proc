@@ -7,7 +7,7 @@ use Resgen\Common\Proc\EscapeProcessException;
 class TtlInstantKillProcessDriver extends TtlProcessDriver {
 	use Logs;
 
-	public function sigHandle(int $signo, mixed $info) {
+	public function sigHandle(int $signo, $info) {
 		$this->log()->info('Interrupt signal recieved. Hard exiting.');
 
 		$this->interrupt = true;
