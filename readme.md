@@ -1,11 +1,13 @@
 Lumen Process Control Drivers
 =============================
 
-Process control for running artisan commands as a deamon. Respects all sigterm commands sent. Includes TTL driver and RunOnce drivers. This should work for Laravel too, but its only been tested with lumen.
+Process control for running artisan commands as a deamon. Respects all sigterm commands sent. Includes TTL driver and RunOnce drivers. This should work for Laravel too, but its only been tested with
+lumen.
 
 ## Why?
 
-When running artisan commands as a background deamon process, the ProcessControl will ensure that SIGTERMs are respected. This is especially important when running artisan commands as the docker entrypoint. It will respect docker's kill signal and give you a chance to finish work before exiting.
+When running artisan commands as a background deamon process, the ProcessControl will ensure that SIGTERMs are respected. This is especially important when running artisan commands as the docker
+entrypoint. It will respect docker's kill signal and give you a chance to finish work before exiting.
 
 ## Install
 
@@ -37,7 +39,8 @@ By default, the TTL drivers will log an INFO heart beat every ~5 seconds. You ca
 LUMEN_PROC_HEARTBEAT=disabled
 ```
 
-You may enable `SignalException` to be thrown asynchronously when a signal is processed, this will happen from wherever your normal code is being executed and gives you a chance to clean things up gracefully while still responding immediately to signals (or ignore them if appropriate.)
+You may enable `SignalException` to be thrown asynchronously when a signal is processed, this will happen from wherever your normal code is being executed and gives you a chance to clean things up
+gracefully while still responding immediately to signals (or ignore them if appropriate.)
 
 ```bash
 LUMEN_PROC_THROW_SIGNAL_EXCEPTION=enabled
@@ -49,7 +52,8 @@ LUMEN_PROC_THROW_SIGNAL_EXCEPTION=enabled
 
 ENV name: `ttl`.
 
-Runs for N number of seconds. Defaults to 300s runtime. Logs a heart beat message every ~6 seconds. You can adjust the runtime by setting the `LUMEN_PROC_TTL=1000s`. Will exit if a SIGTERM is sent. Intended to be used with a process supervisor like runit, supervisord or inside a docker orchestration env like kubernetes.
+Runs for N number of seconds. Defaults to 300s runtime. Logs a heart beat message every ~6 seconds. You can adjust the runtime by setting the `LUMEN_PROC_TTL=1000s`. Will exit if a SIGTERM is sent.
+Intended to be used with a process supervisor like runit, supervisord or inside a docker orchestration env like kubernetes.
 
 #### TtlInstantKillProcessDriver
 

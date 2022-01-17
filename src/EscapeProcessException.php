@@ -2,5 +2,6 @@
 
 namespace Resgen\Common\Proc;
 
-class EscapeProcessException extends \Exception {
+class EscapeProcessException extends \Exception
+{
 }
