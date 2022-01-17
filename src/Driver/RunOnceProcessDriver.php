@@ -10,6 +10,4 @@ class RunOnceProcessDriver implements ProcessControl {
 	public function check() : void {
 		throw new EscapeProcessException('Run once proc control driver configured.');
 	}
-
-	public function throwSignalExceptions(bool $throw = true) : void { /* Ignored */ }
 }

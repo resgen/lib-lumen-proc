@@ -25,7 +25,9 @@ class KeepAliveProcessDriver implements ProcessControl {
 	protected $interrupt = false;
 
 	public function __construct(SignalHandler $signalHandler) {
-		$this->startTime = microtime(true);
+		$this->startTime                = microtime(true);
+		$this->throwSignalExceptions    = env('LUMEN_PROC_THROW_SIGNAL_EXCEPTION', 'disabled') == 'enabled';
+
 		$signalHandler->bind($this, 'sigHandle');
 	}
 
@@ -51,9 +53,5 @@ class KeepAliveProcessDriver implements ProcessControl {
 		if ($this->throwSignalExceptions) {
 			throw new SignalException($signo, $info);
 		}
-	}
-
-	public function throwSignalExceptions(bool $throw = true) : void {
-		$this->throwSignalExceptions = $throw;
 	}
 }
