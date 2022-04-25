@@ -77,33 +77,72 @@ Will escape immediately when `check()` is called.
 
 ```php
 
-use Illuminate\Console\Command;
-use Resgen\Common\Proc\ProcessControl;
-use Resgen\Common\Proc\EscapeProcessException;
-
-class ExampleCommand extends Command
+class ExampleCommand extends LoopingCommand
 {
-    protected $name = 'example';
-    protected $signature = 'example:run';
+    /** {@inheritDoc} */
+    protected $name = 'resgen';
 
-    // will run until ProcessControl escapes
-    public function handle(ProcessControl $proc)
+    /** {@inheritDoc} */
+    protected $signature = 'resgen:example';
+
+    /** {@inheritDoc} */
+    protected function init()
     {
-        try {
-            do {
-                // do some work; consume a queue, check a FS, ect...
-
-                sleep(1);
-
-                $proc->check();
-
-            } while(true);
-
-        } catch (EscapeProcessException $e) {}
-
-        // finish work then exit
+        // Called prior to the first loop
+        // returning `false` will cause the command to stop & exit
     }
 
+    /** {@inheritDoc} */
+    protected function loop()
+    {
+        // Called repeatedly until an exit signal is received or thrown
+
+        return 1;   // Return the number of seconds to sleep/idle until loop() should be called again
+    }
+
+    /** {@inheritDoc} */
+    protected function exiting()
+    {
+        // Called just prior to command handler returns for cleanup
+    }
 }
 ```
 
+## Cron Calls
+
+`LoopingCommand` automatically enables internal cron calls of functions to occur at regular intervals. This check happens each time `loop()` returns control or while the command is sleeping.
+
+### Example Usage
+
+```php
+
+class ExampleCommand extends LoopingCommand
+{
+    /* ...snip... */
+    protected function init()
+    {
+        $this->cron()
+            ->dirCheck('/tmp')
+            ->every(5);
+            
+        $this->cron()
+            ->report()
+            ->every(60);
+    }
+    
+    /** Check that $dir exists, if not, create it. */
+    protected function dirCheck($dir) 
+    {
+        if(!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+    }
+    
+    /** Report on the current state every 60 seconds */
+    protected function report()
+    {
+        Log::info('Sample report every 60 seconds.');
+    }
+    
+}
+```

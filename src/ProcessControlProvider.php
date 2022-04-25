@@ -24,6 +24,8 @@ class ProcessControlProvider extends ServiceProvider
     {
         $drivers = array_merge($this->customDrivers, $this->defaultDrivers);
 
+        $this->app->singleton(CronScheduler::class);
+
         $this->app->singleton(ProcessControl::class, function () use ($drivers) {
             $selectedDriver      = env('LUMEN_PROC_DRIVER', false);
             $availableDriverKeys = implode(',', array_keys($drivers));
